@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import { initializeDatabase } from './db.js';
 import userRoutes from "./routes/userRoutes.js";
-import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,7 +16,6 @@ app.use(cors({
 app.use(express.json());
 
 // ROUTES
-app.use(authRoutes);
 app.use(userRoutes);
 
 const startServer = async () => {
