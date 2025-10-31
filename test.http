@@ -1,0 +1,94 @@
+### Variables
+@baseUrl = http://localhost:3000
+@userId = 1
+@newUserId = 1
+
+### 1. Crear un nuevo usuario (POST)
+POST {{baseUrl}}/create
+Content-Type: application/json
+
+{
+  "nombre": "Juan Pérez",
+  "correo": "juan@example.com",
+  "contraseña": "password123"
+}
+
+### 2. Crear otro usuario (POST)
+POST {{baseUrl}}/create
+Content-Type: application/json
+
+{
+  "nombre": "María García",
+  "correo": "maria@example.com",
+  "contraseña": "password456"
+}
+
+### 3. Intentar crear usuario con correo duplicado (debe fallar)
+POST {{baseUrl}}/create
+Content-Type: application/json
+
+{
+  "nombre": "Otro Usuario",
+  "correo": "juan@example.com",
+  "contraseña": "password789"
+}
+
+### 4. Obtener todos los usuarios (GET)
+GET {{baseUrl}}/all
+
+### 5. Obtener un usuario por ID (GET)
+GET {{baseUrl}}/find/{{userId}}
+
+### 6. Intentar obtener un usuario inexistente (debe fallar)
+GET {{baseUrl}}/find/999
+
+### 7. Actualizar un usuario - solo nombre (PUT)
+PUT {{baseUrl}}/update/{{userId}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos Pérez"
+}
+
+### 8. Actualizar un usuario - solo correo (PUT)
+PUT {{baseUrl}}/update/{{userId}}
+Content-Type: application/json
+
+{
+  "correo": "juan.nuevo@example.com"
+}
+
+### 9. Actualizar un usuario - múltiples campos (PUT)
+PUT {{baseUrl}}/update/{{userId}}
+Content-Type: application/json
+
+{
+  "nombre": "Juan Carlos López",
+  "correo": "juancarlos@example.com",
+  "contraseña": "newpassword123"
+}
+
+### 10. Intentar actualizar sin campos (debe fallar)
+PUT {{baseUrl}}/update/{{userId}}
+Content-Type: application/json
+
+{
+}
+
+### 11. Intentar actualizar usuario inexistente (debe fallar)
+PUT {{baseUrl}}/update/999
+Content-Type: application/json
+
+{
+  "nombre": "Usuario No Existe"
+}
+
+### 12. Eliminar un usuario (DELETE)
+DELETE {{baseUrl}}/delete/{{userId}}
+
+### 13. Intentar eliminar un usuario inexistente (debe fallar)
+DELETE {{baseUrl}}/delete/999
+
+### 14. Verificar que el usuario fue eliminado
+GET {{baseUrl}}/all
+
